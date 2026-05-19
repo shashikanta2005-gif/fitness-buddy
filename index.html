@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Buddy | Level Up Your Training</title>
+    <style>
+        :root {
+            --primary: #10b981;
+            --bg-dark: #0f0f11;
+            --card-bg: #1a1a1e;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', sans-serif; }
+        
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header { 
+            background: rgba(26, 26, 30, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #2e2e36;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { 
+            font-size: 22px; 
+            font-weight: 800; 
+            color: var(--primary); 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+        }
+
+        .hero { 
+            max-width: 1200px; 
+            margin: 80px auto; 
+            padding: 0 5%; 
+            text-align: center; 
+        }
+
+        .hero h1 { 
+            font-size: clamp(32px, 5vw, 56px); 
+            color: #ffffff; 
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero p { 
+            font-size: 18px; 
+            color: var(--text-dim); 
+            max-width: 700px; 
+            margin: 0 auto 60px; 
+        }
+
+        .main-grid { 
+            display: grid; 
+            grid-template-columns: 1.2fr 1fr; 
+            gap: 60px; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            text-align: left; 
+            align-items: start; 
+        }
+
+        @media (max-width: 900px) { 
+            .main-grid { grid-template-columns: 1fr; text-align: center; } 
+            .features-list li { justify-content: center; }
+        }
+
+        .features-list { list-style: none; }
+        
+        .features-list li { 
+            margin-bottom: 30px; 
+            font-size: 18px; 
+            display: flex; 
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+            color: var(--primary);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .feature-text b { color: #fff; display: block; margin-bottom: 4px; }
+        .feature-text span { color: var(--text-dim); font-size: 15px; }
+
+        .form-card { 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 16px; 
+            border: 1px solid #2e2e36; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        /* Subtle Glow Effect */
+        .form-card::after {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            border-radius: 16px;
+            background: linear-gradient(45deg, transparent, #10b98133, transparent);
+            z-index: -1;
+        }
+
+        .form-group { margin-bottom: 25px; }
+        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+        
+        input, select { 
+            width: 100%; 
+            padding: 14px; 
+            background: #0f0f11; 
+            border: 1px solid #2e2e36; 
+            border-radius: 8px; 
+            color: #fff; 
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus { 
+            border-color: var(--primary); 
+            outline: none; 
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+        }
+
+        .btn { 
+            width: 100%; 
+            padding: 16px; 
+            background: var(--primary); 
+            border: none; 
+            border-radius: 8px; 
+            color: #fff; 
+            font-size: 16px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn:hover { 
+            background: #059669; 
+            transform: translateY(-2px);
+        }
+
+        .success-box { text-align: center; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Fitness Buddy</div>
+    </header>
+
+    <section class="hero">
+        <h1>Built for the Dedicated</h1>
+        <p>Your all-in-one execution system designed specifically for fitness enthusiasts and industry specialists.</p>
+        
+        <div class="main-grid">
+            <ul class="features-list">
+                <li>
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">
+                        <b>Smart Workouts</b>
+                        <span>Track complex routines, sets, and RPE with zero friction.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-icon">🥗</div>
+                    <div class="feature-text">
+                        <b>Macro Balancing</b>
+                        <span>Track high-protein vegetarian meals and hit your targets daily.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">
+                        <b>Industry Analytics</b>
+                        <span>Tailored monitoring metrics built for coaches to track client progress.</span>
+                    </div>
+                </li>
+            </ul>
+<div class="form-card" style="margin-top: 20px; background: #1a1a1e; border: 1px solid #10b981;">
+    <h3 style="color: #10b981; margin-bottom: 10px;">Protein Calculator</h3>
+    <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 10px;">Enter your weight in kg</p>
+    <input type="number" id="weightInput" placeholder="e.g. 75" style="margin-bottom: 10px;">
+    <button onclick="calcProtein()" class="btn">Calculate Goal</button>
+    <h2 id="proteinResult" style="margin-top: 15px; color: #fff; font-size: 20px;"></h2>
+</div>
+
+<script>
+    function calcProtein() {
+        let weight = document.getElementById('weightInput').value;
+        if (weight > 0) {
+            // Formula: 2g protein per kg bodyweight
+            let protein = weight * 2; 
+            document.getElementById('proteinResult').innerText = "Target: " + protein + "g / day";
+        } else {
+            alert("Please enter your weight!");
+        }
+    }
+</script>
+            <div class="form-card">
+                {% if success %}
+                    <div class="success-box">
+                        <h2 style="color: var(--primary); margin-bottom: 15px;">Welcome, {{ name }}!</h2>
+                        <p style="color: var(--text-dim);">You've secured early access. We'll be in touch soon.</p>
+                    </div>
+                {% else %}
+                    <form action="/join" method="POST">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" name="full_name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" name="email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Primary Focus Area</label>
+                            <select name="fitness_goal" required>
+                                <option value="" disabled selected>Select your target</option>
+                                <option value="Hypertrophy">Hypertrophy (Building Muscle)</option>
+                                <option value="Strength">Strength & Powerlifting</option>
+                                <option value="Coach">I am a Professional Coach</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Get Early Access</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
