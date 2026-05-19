@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, flash
-import os
 import sqlite3
+import os
+
+# This line MUST be here!
+app = Flask(__name__)
 
 app.secret_key = 'fitness_buddy_secret'
 
