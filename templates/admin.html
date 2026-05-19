@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fitness Buddy Admin</title>
+    <style>
+        body { background: #0f0f11; color: white; font-family: sans-serif; padding: 40px; }
+        h1 { color: #10b981; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid #2e2e36; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #2e2e36; }
+        th { background: #1a1a1e; color: #10b981; }
+        .delete-btn { color: #ff4444; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Registered Members</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Goal</th>
+            <th>Joined At</th>
+            <th>Action</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+            <td>{{ user[2] }}</td>
+            <td>{{ user[3] }}</td>
+            <td>
+                <a href="/delete/{{ user[4] }}" class="delete-btn" onclick="return confirm('Delete this user?')">Delete 🗑️</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="/" style="color: #10b981;">← Back to Landing Page</a></p>
+</body>
+</html>
