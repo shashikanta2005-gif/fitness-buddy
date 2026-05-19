@@ -49,32 +49,31 @@ def join_beta():
         return f"Database Error: {e}"
     finally:
         conn.close()
-   @app.route('/admin')
-   def admin_panel():
-    conn = sqlite3.connect(DB_PATH) # Changed this line
+  @app.route('/admin')
+def admin_panel():
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    # ... rest of your code ...
+    
     # 1. We ask for the ID so the delete button knows which row to hit
-    cursor.execute("SELECT full_name, email, fitness_goal, created_at, id FROM users")
+    cursor.execute("SELECT id, full_name, email, fitness_goal, created_at FROM users")
     all_users = cursor.fetchall()
     conn.close()
     return render_template('admin.html', users=all_users)
 
 @app.route('/delete/<int:user_id>')
 def delete_user(user_id):
-    conn = sqlite3.connect(DB_PATH) # Changed this line
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    # ... rest of your code ...
+    
     # 2. This finds the specific ID and deletes it
     cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
     conn.commit()
     conn.close()
+    
     # 3. This sends you back to the admin page to see the updated list
     return redirect('/admin')
-# Make sure this part below has NO spaces before it
-    # --- This must have NO SPACES before it ---
+
 if __name__ == '__main__':
     init_db()
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
-    
