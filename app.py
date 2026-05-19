@@ -49,21 +49,22 @@ def join_beta():
         return f"Database Error: {e}"
     finally:
         conn.close()
-        @app.route('/admin')
-        def admin_panel():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+        
+    @app.route('/admin')
+def admin_panel():
+    conn = sqlite3.connect(DB_PATH)          # <-- Indent 4 spaces
+    cursor = conn.cursor()                    # <-- Indent 4 spaces
     
-    # FIX: "fitness_goal" was missing from your SELECT query in earlier versions
-    cursor.execute("SELECT id, full_name, email, fitness_goal, created_at FROM users")
-    all_users = cursor.fetchall()
-    conn.close()
-    return render_template('admin.html', users=all_users)
+    # FIX: "fitness_goal" was missing...     # <-- Indent 4 spaces
+    cursor.execute("SELECT id, full_name...") # <-- Indent 4 spaces
+    all_users = cursor.fetchall()             # <-- Indent 4 spaces
+    conn.close()                              # <-- Indent 4 spaces
+    return render_template('admin.html', ...) # <-- Indent 4 spaces
 
-@app.route('/delete/<int:user_id>')
-def delete_user(user_id):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+@app.route('/delete/<int:user_id>')   # <-- Move completely to the left (0 spaces)
+def delete_user(user_id):             # <-- Move completely to the left (0 spaces)
+    conn = sqlite3.connect(DB_PATH)   # <-- Keep indented (4 spaces)
+    cursor = conn.cursor()             # <-- Keep indented (4 spaces)
     
     cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
     conn.commit()
