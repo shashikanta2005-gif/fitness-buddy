@@ -50,8 +50,8 @@ def join_beta():
     finally:
         conn.close()
         
-    @app.route('/admin')
-    def admin_panel():
+@app.route('/admin')
+def admin_panel():
     conn = sqlite3.connect(DB_PATH)          # <-- Indent 4 spaces
     cursor = conn.cursor()                    # <-- Indent 4 spaces
     
