@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash
-import sqlite3
 import os
+import sqlite3
 
-app = Flask(__name__)
 app.secret_key = 'fitness_buddy_secret'
 
 # --- NEW: This function builds the table if it's missing ---
@@ -70,9 +69,9 @@ def delete_user(user_id):
     # 3. This sends you back to the admin page to see the updated list
     return redirect('/admin')
 # Make sure this part below has NO spaces before it
+    # --- This must have NO SPACES before it ---
 if __name__ == '__main__':
     init_db()
-    # This line allows the server to tell your app which 'port' to use
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
     
