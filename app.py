@@ -49,12 +49,12 @@ def join_beta():
         return f"Database Error: {e}"
     finally:
         conn.close()
-  @app.route('/admin')
-def admin_panel():
+        @app.route('/admin')
+        def admin_panel():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
-    # 1. We ask for the ID so the delete button knows which row to hit
+    # FIX: "fitness_goal" was missing from your SELECT query in earlier versions
     cursor.execute("SELECT id, full_name, email, fitness_goal, created_at FROM users")
     all_users = cursor.fetchall()
     conn.close()
@@ -65,12 +65,10 @@ def delete_user(user_id):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
-    # 2. This finds the specific ID and deletes it
     cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
     conn.commit()
     conn.close()
     
-    # 3. This sends you back to the admin page to see the updated list
     return redirect('/admin')
 
 if __name__ == '__main__':
