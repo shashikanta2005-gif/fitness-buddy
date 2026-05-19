@@ -2,14 +2,16 @@ from flask import Flask, render_template, request, redirect, flash
 import sqlite3
 import os
 
-# This line MUST be here!
 app = Flask(__name__)
 app.secret_key = 'fitness_buddy_secret'
 
-# --- NEW: This function builds the table if it's missing ---
+# --- ADD THIS LINE RIGHT HERE ---
+# This forces the app to look in its exact folder location
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fitness_buddy.db')
 def init_db():
-    conn = sqlite3.connect('fitness_buddy.db')
-    cursor = conn.cursor()# This creates the table structure
+    conn = sqlite3.connect(DB_PATH) # Changed this line
+    cursor = conn.cursor()
+    # ... rest of your code ...# This creates the table structure
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,12 +49,11 @@ def join_beta():
         return f"Database Error: {e}"
     finally:
         conn.close()
-
-
    @app.route('/admin')
    def admin_panel():
-    conn = sqlite3.connect('fitness_buddy.db')
+    conn = sqlite3.connect(DB_PATH) # Changed this line
     cursor = conn.cursor()
+    # ... rest of your code ...
     # 1. We ask for the ID so the delete button knows which row to hit
     cursor.execute("SELECT full_name, email, fitness_goal, created_at, id FROM users")
     all_users = cursor.fetchall()
@@ -61,8 +62,9 @@ def join_beta():
 
 @app.route('/delete/<int:user_id>')
 def delete_user(user_id):
-    conn = sqlite3.connect('fitness_buddy.db')
+    conn = sqlite3.connect(DB_PATH) # Changed this line
     cursor = conn.cursor()
+    # ... rest of your code ...
     # 2. This finds the specific ID and deletes it
     cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
     conn.commit()
