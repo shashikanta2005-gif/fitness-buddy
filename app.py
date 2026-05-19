@@ -4,14 +4,12 @@ import os
 
 # This line MUST be here!
 app = Flask(__name__)
-
 app.secret_key = 'fitness_buddy_secret'
 
 # --- NEW: This function builds the table if it's missing ---
 def init_db():
     conn = sqlite3.connect('fitness_buddy.db')
-    cursor = conn.cursor()
-    # This creates the table structure
+    cursor = conn.cursor()# This creates the table structure
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -50,7 +48,7 @@ def join_beta():
     finally:
         conn.close()
 
-if __name__ == '__main__':
+
    @app.route('/admin')
    def admin_panel():
     conn = sqlite3.connect('fitness_buddy.db')
